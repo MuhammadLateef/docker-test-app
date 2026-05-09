@@ -1,32 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css" type="text/css" />
-    <title>Home Page</title>
+    <title>XYZ University — Portal</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
-<body>
-    <h1>Hi student, Welcome to XYZ University!</h1>
-    <p>You can sign up to the platform to access all important notes & lectures.</p>
 
-    <form action="/addUser" method="POST" target="_blank" id="signupForm">
-        <div class="field">
-            <label for="email">Email: </label>
-            <input type="text" placeholder="jane@email.com" name="email">
+<body>
+
+    <!-- ========== REGISTER PAGE ========== -->
+    <div class="page" id="registerPage">
+        <div class="univ-wrap">
+            <div class="deco-arc"></div>
+            <div class="deco-arc2"></div>
+
+            <div class="univ-left">
+                <div class="crest" aria-hidden="true">🎓</div>
+                <h1 class="univ-tagline">Begin your<br><span>academic</span><br>journey.</h1>
+                <p class="univ-sub">Join thousands of students at XYZ University and unlock world-class notes, lectures, and resources.</p>
+                <div class="features">
+                    <div class="feat-item">
+                        <div class="feat-dot"></div>Curated lecture recordings &amp; transcripts</div>
+                    <div class="feat-item">
+                        <div class="feat-dot"></div>Downloadable notes from every faculty</div>
+                    <div class="feat-item">
+                        <div class="feat-dot"></div>Live Q&amp;A sessions with professors</div>
+                    <div class="feat-item">
+                        <div class="feat-dot"></div>Peer study groups &amp; discussion boards</div>
+                </div>
+            </div>
+
+            <div class="univ-right">
+                <p class="form-heading">Create an account</p>
+                <p class="form-sub">Access your student portal in seconds</p>
+
+                <form id="signupForm" novalidate>
+                    <div class="field-group">
+                        <label class="field-label" for="reg-email">Email address</label>
+                        <input class="field-input" id="reg-email" type="email" placeholder="jane@xyz.edu" autocomplete="email">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="reg-username">Full name</label>
+                        <input class="field-input" id="reg-username" type="text" placeholder="Jane Doe" autocomplete="name">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="reg-password">Password</label>
+                        <div class="pass-wrap">
+                            <input class="field-input" id="reg-password" type="password" placeholder="Min. 8 characters" autocomplete="new-password">
+                            <button class="pass-toggle" type="button" aria-label="Toggle password" onclick="togglePass('reg-password', this)">
+                <i class="ti ti-eye" aria-hidden="true"></i>
+              </button>
+                        </div>
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                    </div>
+
+                    <div class="divider">
+                        <div class="divider-line"></div>
+                        <span class="divider-text">Student enrollment</span>
+                        <div class="divider-line"></div>
+                    </div>
+
+                    <button class="btn-primary" type="submit">Create Student Account</button>
+                </form>
+
+                <p class="switch-link">Already enrolled? <a href="#" onclick="switchPage('login'); return false;">Sign in to portal →</a></p>
+            </div>
         </div>
-        <div class="field">    
-        <label for="username">Username: </label>
-            <input type="text" placeholder="Jane Doe" name="username">
+    </div>
+
+    <!-- ========== LOGIN PAGE ========== -->
+    <div class="page hidden" id="loginPage">
+        <div class="univ-wrap login-wrap">
+            <div class="deco-arc"></div>
+            <div class="deco-arc2"></div>
+
+            <div class="univ-left">
+                <div class="crest" aria-hidden="true">🎓</div>
+                <h1 class="univ-tagline">Welcome<br><span>back,</span><br>scholar.</h1>
+                <p class="univ-sub">Sign in to continue your learning journey and pick up right where you left off.</p>
+                <div class="features">
+                    <div class="feat-item">
+                        <div class="feat-dot"></div>Access your saved notes &amp; bookmarks</div>
+                    <div class="feat-item">
+                        <div class="feat-dot"></div>Resume ongoing courses &amp; lectures</div>
+                    <div class="feat-item">
+                        <div class="feat-dot"></div>Check upcoming assignment deadlines</div>
+                    <div class="feat-item">
+                        <div class="feat-dot"></div>Connect with your study groups</div>
+                </div>
+            </div>
+
+            <div class="univ-right">
+                <p class="form-heading">Sign in</p>
+                <p class="form-sub">Enter your credentials to access the portal</p>
+
+                <form id="loginForm" novalidate>
+                    <div class="field-group">
+                        <label class="field-label" for="log-email">Email address</label>
+                        <input class="field-input" id="log-email" type="email" placeholder="jane@xyz.edu" autocomplete="email">
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="log-password">Password</label>
+                        <div class="pass-wrap">
+                            <input class="field-input" id="log-password" type="password" placeholder="Your password" autocomplete="current-password">
+                            <button class="pass-toggle" type="button" aria-label="Toggle password" onclick="togglePass('log-password', this)">
+                <i class="ti ti-eye" aria-hidden="true"></i>
+              </button>
+                        </div>
+                    </div>
+
+                    <div class="remember-row">
+                        <label class="check-label">
+              <input type="checkbox" id="rememberMe">
+              <span>Remember me</span>
+            </label>
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+
+                    <div class="divider">
+                        <div class="divider-line"></div>
+                        <span class="divider-text">Student portal</span>
+                        <div class="divider-line"></div>
+                    </div>
+
+                    <button class="btn-primary" type="submit">Sign In</button>
+                </form>
+
+                <p class="switch-link">New student? <a href="#" onclick="switchPage('register'); return false;">Create an account →</a></p>
+            </div>
         </div>
-        <div class="field">
-            <label for="password">Password: </label>
-            <input type="password" placeholder="password" name="password">
-        </div>
-        
-        <button id="formBtn">Create Account</button>
-        
-    </form>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        /* ---- Page Switch with Slide Animation ---- */
+        function switchPage(target) {
+            const reg = document.getElementById('registerPage');
+            const log = document.getElementById('loginPage');
+
+            if (target === 'login') {
+                reg.classList.add('slide-out-left');
+                setTimeout(() => {
+                    reg.classList.add('hidden');
+                    reg.classList.remove('slide-out-left');
+                    log.classList.remove('hidden');
+                    log.classList.add('slide-in-right');
+                    setTimeout(() => log.classList.remove('slide-in-right'), 420);
+                }, 360);
+            } else {
+                log.classList.add('slide-out-right');
+                setTimeout(() => {
+                    log.classList.add('hidden');
+                    log.classList.remove('slide-out-right');
+                    reg.classList.remove('hidden');
+                    reg.classList.add('slide-in-left');
+                    setTimeout(() => reg.classList.remove('slide-in-left'), 420);
+                }, 360);
+            }
+        }
+
+        /* ---- Password Show / Hide ---- */
+        function togglePass(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const hidden = input.type === 'password';
+            input.type = hidden ? 'text' : 'password';
+            btn.innerHTML = hidden ?
+                '<i class="ti ti-eye-off" aria-hidden="true"></i>' :
+                '<i class="ti ti-eye" aria-hidden="true"></i>';
+        }
+
+        /* ---- Password Strength Meter ---- */
+        document.getElementById('reg-password').addEventListener('input', function() {
+            let score = 0;
+            if (this.value.length >= 8) score++;
+            if (/[A-Z]/.test(this.value)) score++;
+            if (/[0-9]/.test(this.value)) score++;
+            if (/[^A-Za-z0-9]/.test(this.value)) score++;
+            const fill = document.getElementById('strengthFill');
+            const colors = ['transparent', '#e24b4a', '#ef9f27', '#639922', '#1d9e75'];
+            fill.style.width = (score * 25) + '%';
+            fill.style.background = colors[score];
+        });
+
+        /* ---- Register Form ---- */
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('reg-email').value.trim();
+            const name = document.getElementById('reg-username').value.trim();
+            const pass = document.getElementById('reg-password').value;
+            if (!email || !name || !pass) return showToast('⚠ Please fill in all fields', '#e24b4a');
+            if (pass.length < 8) return showToast('⚠ Password must be at least 8 characters', '#e24b4a');
+            showToast('✓ Account created — welcome to XYZ University!', '#d4af37');
+        });
+
+        /* ---- Login Form ---- */
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('log-email').value.trim();
+            const pass = document.getElementById('log-password').value;
+            if (!email || !pass) return showToast('⚠ Please enter your email and password', '#e24b4a');
+            showToast('✓ Signed in successfully — welcome back!', '#d4af37');
+        });
+
+        /* ---- Toast Notification ---- */
+        function showToast(msg, color) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.style.color = color;
+            t.style.borderColor = color + '99';
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3200);
+        }
+    </script>
+
 </body>
 
 </html>

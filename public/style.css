@@ -1,25 +1,512 @@
+/* ============================================
+   XYZ University Portal — Stylesheet
+   Covers: Register, Login, Transitions
+============================================ */
+
+
+/* === Reset & Base === */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #060e1c;
+    font-family: 'DM Sans', sans-serif;
+    padding: 2rem 1rem;
+    overflow-x: hidden;
 }
-#formBtn {
-    color: white;
-    background-color:coral;
+
+
+/* === Page Containers === */
+
+.page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    animation: fadeIn 0.4s ease;
+}
+
+.page.hidden {
+    display: none;
+}
+
+
+/* === Slide Animations === */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.slide-out-left {
+    animation: slideOutLeft 0.36s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.slide-out-right {
+    animation: slideOutRight 0.36s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+
+/* === Card Wrapper === */
+
+.univ-wrap {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    min-height: 580px;
+    background: linear-gradient(135deg, #0a1628 0%, #112240 50%, #0d1f3c 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 0.5px solid rgba(212, 175, 55, 0.2);
+}
+
+
+/* Login accent — slightly warmer tint */
+
+.login-wrap {
+    background: linear-gradient(135deg, #0d1a2e 0%, #0f2035 50%, #0a1628 100%);
+}
+
+
+/* === Decorative Arcs === */
+
+.deco-arc {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 60px solid rgba(212, 175, 55, 0.06);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.deco-arc2 {
+    position: absolute;
+    left: -80px;
+    bottom: -80px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 40px solid rgba(212, 175, 55, 0.04);
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+/* === Left Branding Panel === */
+
+.univ-left {
+    flex: 1;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.crest {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 1.5rem;
+}
+
+.univ-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f5f0e8;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.univ-tagline span {
+    color: #d4af37;
+}
+
+.univ-sub {
+    font-size: 0.9rem;
+    color: rgba(200, 210, 230, 0.65);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.feat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.83rem;
+    color: rgba(200, 215, 235, 0.7);
+    font-weight: 300;
+}
+
+.feat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d4af37;
+    flex-shrink: 0;
+}
+
+
+/* === Right Form Panel === */
+
+.univ-right {
+    width: 400px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.04);
+    border-left: 0.5px solid rgba(212, 175, 55, 0.2);
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.form-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #f5f0e8;
+    margin-bottom: 0.25rem;
+}
+
+.form-sub {
+    font-size: 0.8rem;
+    color: rgba(200, 210, 230, 0.45);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+
+/* === Fields === */
+
+.field-group {
+    margin-bottom: 1.1rem;
+}
+
+.field-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(212, 175, 55, 0.8);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+
+.field-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 0.5px solid rgba(212, 175, 55, 0.25);
+    border-radius: 6px;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+    color: #f0ebe0;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.field-input::placeholder {
+    color: rgba(200, 210, 230, 0.3);
+    font-size: 0.85rem;
+}
+
+.field-input:focus {
+    border-color: rgba(212, 175, 55, 0.65);
+    background: rgba(255, 255, 255, 0.09);
+}
+
+
+/* === Password Toggle === */
+
+.pass-wrap {
+    position: relative;
+}
+
+.pass-wrap .field-input {
+    padding-right: 2.5rem;
+}
+
+.pass-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
     border: none;
-    border-radius: 2px;
-    padding: 0.25rem 1rem;
-    margin-top: 1rem;
+    color: rgba(212, 175, 55, 0.5);
     cursor: pointer;
-    font-size: 1rem;
+    padding: 0;
+    font-size: 15px;
+    line-height: 1;
+    transition: color 0.2s;
 }
 
-form {
-    border: 2px solid grey;
-    display: inline-block;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    text-align: left;
+.pass-toggle:hover {
+    color: rgba(212, 175, 55, 0.9);
 }
 
-.field {
-    margin-bottom: 0.5rem;
+
+/* === Password Strength Bar === */
+
+.strength-bar {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+
+/* === Remember Me Row (Login only) === */
+
+.remember-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.75rem 0 0.25rem;
+}
+
+.check-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(200, 210, 230, 0.55);
+    cursor: pointer;
+    user-select: none;
+}
+
+.check-label input[type="checkbox"] {
+    accent-color: #d4af37;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+
+.forgot-link {
+    font-size: 0.8rem;
+    color: rgba(212, 175, 55, 0.65);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.forgot-link:hover {
+    color: #d4af37;
+}
+
+
+/* === Divider === */
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.divider-line {
+    flex: 1;
+    height: 0.5px;
+    background: rgba(212, 175, 55, 0.15);
+}
+
+.divider-text {
+    font-size: 0.7rem;
+    color: rgba(200, 210, 230, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    white-space: nowrap;
+}
+
+
+/* === Primary Button === */
+
+.btn-primary {
+    width: 100%;
+    padding: 0.8rem;
+    background: #d4af37;
+    border: none;
+    border-radius: 6px;
+    color: #0a1628;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+
+/* === Switch Link (Sign in / Register toggle) === */
+
+.switch-link {
+    text-align: center;
+    margin-top: 1.25rem;
+    font-size: 0.78rem;
+    color: rgba(200, 210, 230, 0.4);
+}
+
+.switch-link a {
+    color: rgba(212, 175, 55, 0.8);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.switch-link a:hover {
+    color: #d4af37;
+}
+
+
+/* === Toast Notification === */
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: rgba(10, 22, 40, 0.97);
+    border: 0.5px solid rgba(212, 175, 55, 0.4);
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+    color: #d4af37;
+    white-space: nowrap;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+
+/* === Responsive — Mobile === */
+
+@media (max-width: 680px) {
+    .univ-wrap {
+        flex-direction: column;
+        min-height: unset;
+    }
+    .univ-left {
+        padding: 2.5rem 2rem 1.5rem;
+    }
+    .univ-tagline {
+        font-size: 1.9rem;
+    }
+    .univ-right {
+        width: 100%;
+        border-left: none;
+        border-top: 0.5px solid rgba(212, 175, 55, 0.2);
+        padding: 2rem;
+    }
+    .deco-arc {
+        display: none;
+    }
 }
